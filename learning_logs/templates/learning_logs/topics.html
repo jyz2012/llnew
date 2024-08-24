@@ -1,0 +1,37 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+  <h1>Topics</h1>
+{% endblock page_header %}
+
+{% block content %}
+
+  <ul class="list-group border-bottom pb-2 mb-4">
+    {% for topic in topics %}
+      <li class="list-group-item border-0">
+        <a href="{% url 'learning_logs:topic' topic.id %}">
+          <h2 class="textinlinetext">{{ topic.text }}</h2>
+        </a>
+        &nbsp;&nbsp;
+        <a href="{% url 'learning_logs:delete_topic' topic.id %}" class="ex1" 
+        class="textinlinetext" 
+        onclick="return confirm('Are you sure you want to delete this topic?');"> 
+          delete
+        </a>
+      </li>
+    {% empty %}
+      <li class="list-group-item border-0">
+        <h5>
+          No topics have been added yet.
+        </h5>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'learning_logs:new_topic' %}">
+    <h4>
+      Add a new topic
+    </h4>
+  </a>
+
+{% endblock content %}
